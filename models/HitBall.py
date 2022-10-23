@@ -1,4 +1,5 @@
 import turtle
+from models.GameScreen import GameScreen
 from managers.EventManager import EventManager
 
 
@@ -18,6 +19,20 @@ class HitBall:
         b.color("blue")
         b.penup()
         b.goto(0, 0)
+
+        GameScreen.bindKeys(self.speedincrease,"I")
+        GameScreen.bindKeys(self.speeddecrease, "K")
+
+
+
+
+    def speedincrease(self):
+        self.dx += 2
+        self.dy += 2
+
+    def speeddecrease(self):
+        self.dx -= 2
+        self.dy -= 2
 
     def update(self):
         b = self.ball
