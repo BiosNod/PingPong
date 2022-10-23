@@ -20,19 +20,16 @@ class HitBall:
         b.penup()
         b.goto(0, 0)
 
-        GameScreen.bindKeys(self.speedincrease,"I")
+        GameScreen.bindKeys(self.speedincrease, "I")
         GameScreen.bindKeys(self.speeddecrease, "K")
 
-
-
-
     def speedincrease(self):
-        self.dx += 2
-        self.dy += 2
+        self.dx += 2 * (-1 if self.dx < 0 else 1)
+        self.dy += 2 * (-1 if self.dy < 0 else 1)
 
     def speeddecrease(self):
-        self.dx -= 2
-        self.dy -= 2
+        self.dx -= 2 * (1 if self.dx > 0 else -1)
+        self.dy -= 2 * (1 if self.dy > 0 else -1)
 
     def update(self):
         b = self.ball
