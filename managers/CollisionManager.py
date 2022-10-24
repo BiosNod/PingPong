@@ -1,20 +1,25 @@
 class CollisionManager:
+    collisionDistance = 80
     players = None
-    hitBall = None
+    hitBalls = None
 
-    def __init__(self, players, hitBall):
+    def __init__(self, players, hitBalls):
         self.players = players
-        self.hitBall = hitBall
+        self.hitBalls = hitBalls
 
     def update(self):
-        ball = self.hitBall.ball
         players = self.players
 
-        # Ball collision with players paddles
-        if ball.xcor() > 360 and ball.xcor() < 370 and ball.ycor() < players[1].ycor() + 40 and ball.ycor() > players[1].ycor() - 40:
-            ball.setx(360)
-            self.hitBall.dx *= -1
+        for player in players:
+            for hitball in self.hitBalls:
+                ball = hitball.ball
+                collisionDistance = self.collisionDistance
 
-        if ball.xcor() < -360 and ball.xcor() > -370 and ball.ycor() < players[0].ycor() + 40 and ball.ycor() > players[0].ycor() - 40:
-            ball.setx(-360)
-            self.hitBall.dx *= -1
+                # Ball collision with players paddles
+                if ball.xcor() > 360 and ball.xcor() < 370 and ball.ycor() < player.ycor() + collisionDistance and ball.ycor() > player.ycor() - collisionDistance:
+                    ball.setx(360)
+                    hitball.dx *= -1
+
+                if ball.xcor() < -360 and ball.xcor() > -370 and ball.ycor() < player.ycor() + collisionDistance and ball.ycor() > player.ycor() - collisionDistance:
+                    ball.setx(-360)
+                    hitball.dx *= -1

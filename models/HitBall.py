@@ -1,6 +1,7 @@
 import turtle
+from models.GameScreen import GameScreen
 from managers.EventManager import EventManager
-
+from random import randint
 
 class HitBall:
     ball = None
@@ -17,7 +18,21 @@ class HitBall:
         b.shape("circle")
         b.color("blue")
         b.penup()
-        b.goto(0, 0)
+
+        # Random spawm of ball
+        #b.goto(0, 0)
+        b.goto(randint(0, 50), randint(0, 50))
+
+        GameScreen.bindKeys(self.speedincrease, "I")
+        GameScreen.bindKeys(self.speeddecrease, "K")
+
+    def speedincrease(self):
+        self.dx += 2 * (-1 if self.dx < 0 else 1)
+        self.dy += 2 * (-1 if self.dy < 0 else 1)
+
+    def speeddecrease(self):
+        self.dx -= 2 * (1 if self.dx > 0 else -1)
+        self.dy -= 2 * (1 if self.dy > 0 else -1)
 
     def update(self):
         b = self.ball
