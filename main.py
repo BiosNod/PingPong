@@ -20,15 +20,18 @@ from models.Obstalce import Obstacle
 eventManager = EventManager()
 eventManager.registerCallback(lambda: gameScreen.drawSketch(players), EventManager.EVENT_GOAL)
 gameScreen = GameScreen()
-hitBall = HitBall(eventManager)
+hitBalls = [HitBall(eventManager), HitBall(eventManager), HitBall(eventManager)]
 
 players = [Pad(-400, "W", "S"), Pad(400, "Up", "Down"), Pad(400, "E", "D")]
 gameScreen.drawSketch(players)
-collisionManager = CollisionManager(players, hitBall)
+collisionManager = CollisionManager(players, hitBalls)
 
 Obstacle()
 
 while 1:
     gameScreen.update()
-    hitBall.update()
+
+    for hitBall in hitBalls:
+        hitBall.update()
+
     collisionManager.update()
