@@ -10,11 +10,13 @@ class CollisionManager:
         ball = self.hitBall.ball
         players = self.players
 
-        # Ball collision with players paddles
-        if ball.xcor() > 360 and ball.xcor() < 370 and ball.ycor() < players[1].ycor() + 40 and ball.ycor() > players[1].ycor() - 40:
-            ball.setx(360)
-            self.hitBall.dx *= -1
+        for player in players:
 
-        if ball.xcor() < -360 and ball.xcor() > -370 and ball.ycor() < players[0].ycor() + 40 and ball.ycor() > players[0].ycor() - 40:
-            ball.setx(-360)
-            self.hitBall.dx *= -1
+            # Ball collision with players paddles
+            if ball.xcor() > 360 and ball.xcor()< 370 and ball.ycor() < player.ycor() + 40 and ball.ycor() > player.ycor() - 40:
+                ball.setx(360)
+                self.hitBall.dx *= -1
+
+            if ball.xcor() < -360 and ball.xcor() > -370 and ball.ycor() < player.ycor() + 40 and ball.ycor() > player.ycor() - 40:
+                ball.setx(-360)
+                self.hitBall.dx *= -1
